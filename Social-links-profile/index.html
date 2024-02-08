@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@600;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>Frontend Mentor | Social links profile</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; color: white;}
+    .attribution a { color: hsl(328, 45%, 44%); }
+    
+    * {
+  box-sizing: border-box;
+}
+    body{
+      background-color: black;
+    }
+
+    .flex-container{
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      
+    }
+    .card{
+      padding: 20px;
+      background-color: hsl(0, 0%, 12%);
+     
+    }
+  
+    .card-title{
+      color: white;
+      font-family: 'Figtree', sans-serif;
+      font-family: 'Inter', sans-serif;
+      white-space: pre;
+      font-weight: 700;
+    }
+    .card-text{
+      color: hsl(75, 94%, 57%);
+      font-family: 'Figtree', sans-serif;
+      font-family: 'Inter', sans-serif;
+    }
+    .card-text1{
+     
+      font-size: 14px;
+      
+      color: white;
+      font-family: 'Figtree', sans-serif;
+      font-family: 'Inter', sans-serif;
+      
+      margin-top: 10px;
+      
+      
+    }
+    .btn{
+      background-color: hsl(0, 0%, 20%);
+      border: none;
+      font-weight: 500;
+      font-size: small;
+      padding: 15px; 
+      
+    }
+    .btn:hover{
+      background-color: hsl(75, 94%, 57%) !important;
+      color: black;
+    }
+  
+    .Jessica img{
+      border-radius: 50%;
+      
+    }
+    .Jessica {
+      text-align: center;
+    }
+.butttons{
+  margin: 20px;
+}
+  </style>
+</head>
+<body>
+  <main>
+  <div class="flex-container">
+  <div class="card col-12 col-lg-6" style="width: 22rem;">
+    
+    <div class="Jessica">
+      <img src="./assets/images/avatar-jessica.jpeg" width="100px">
+      
+
+    </div>
+    <div class="position-relative text-center card-body">
+        
+      <h2 class="card-title">Jessica Randall</h2>
+      <h6 class="card-text">London, United Kingdom</h6>
+      <p class=" card-text1">
+          "Front-end developer and avid reader."
+      </p>
+      
+    </div>
+    <!-- <div class="card-body">
+      <h3 class="card-title">Jessica Randall</h3>
+      <h6 class="card-text">London, United Kingdom</h6>
+      <p class="card-text1">"Front-end developer and avid reader."</p>
+    </div> -->
+    <ul class="list-group list-group-flush ">
+      
+      <div class="d-grid gap-3 butttons">
+        <button class="btn btn-primary" type="button">GitHub</button>
+        <button class="btn btn-primary" type="button">Frontend Mentor</button>
+        <button class="btn btn-primary" type="button">LinkedIn</button>
+        <button class="btn btn-primary" type="button">Twitter</button>
+        <button class="btn btn-primary" type="button">Instagram</button>
+        
+      </div>
+    </ul>
+   
+  </div>
+</div>
+</main>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Sherin</a>.
+  </div>
+</body>
+</html>
