@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research - SleepFix AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230050e6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/></svg>">
+    <style>
+        :root {
+            --primary: #0050e6;
+            --primary-dark: #003bb0;
+            --secondary: #2e7ef5;
+            --accent: #7bb5ff;
+            --dark: #121340;
+            --light: #f6faff;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+            
+            /* Light mode (default) */
+            --bg-primary: var(--light);
+            --bg-secondary: var(--white);
+            --text-primary: var(--dark);
+            --text-secondary: #445277;
+            --card-bg: var(--white);
+            --card-shadow: rgba(0,0,0,0.05);
+            --border-color: #eee;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --text-primary: #e6e6e6;
+            --text-secondary: #b3b3b3;
+            --card-bg: #16213e;
+            --card-shadow: rgba(0,0,0,0.2);
+            --border-color: #2a2a3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+        
+        header {
+            background-color: var(--bg-secondary);
+            box-shadow: 0 2px 15px var(--card-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .research-section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #445277;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+        
+        .category-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .category-btn {
+            background-color: var(--white);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+        
+        .category-btn:hover,
+        .category-btn.active {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .research-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px var(--card-shadow);
+            transition: var(--transition);
+        }
+        
+        .research-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .research-category {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .research-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        .research-authors {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .research-abstract {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .research-link {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .research-link:hover {
+            color: var(--primary-dark);
+        }
+        
+        .research-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .category-section {
+            margin-bottom: 4rem;
+        }
+        
+        .category-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--accent);
+            color: var(--primary-dark);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .theme-toggle:hover {
+            color: var(--primary);
+        }
+        
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .research-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .category-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .theme-toggle {
+                position: fixed;
+                top: 1rem;
+                right: 1rem;
+                z-index: 101;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="logo fade-in">
+                    SleepFix AI
+                </a>
+                <button class="theme-toggle" id="theme-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="research-section">
+        <div class="container">
+            <h1 class="section-title">Sleep Deprivation Research</h1>
+            <p class="section-subtitle">Explore scientific research on the consequences of sleep deprivation, related diseases, and disorders with real-life examples.</p>
+            
+            <div class="category-nav">
+                <button class="category-btn active" data-category="all">All Research</button>
+                <button class="category-btn" data-category="cardiovascular">Cardiovascular</button>
+                <button class="category-btn" data-category="mental-health">Mental Health</button>
+                <button class="category-btn" data-category="metabolic">Metabolic</button>
+                <button class="category-btn" data-category="cognitive">Cognitive</button>
+                <button class="category-btn" data-category="disorders">Sleep Disorders</button>
+            </div>
+            
+            <!-- Cardiovascular Health Section -->
+            <div class="category-section" id="cardiovascular">
+                <h2 class="category-title">Cardiovascular Health</h2>
+                <div class="research-grid">
+                    <article class="research-card">
+                        <div class="research-category">Cardiovascular Health</div>
+                        <h2 class="research-title">Sleep Deprivation and Increased Risk of Cardiovascular Disease</h2>
+                        <p class="research-abstract">A 10-year study of 4,000 adults found that sleeping less than 6 hours per night increased the risk of coronary heart disease by 48%. Shift workers with disrupted sleep patterns developed hypertension at 2.5 times the rate of day workers.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Cardiovascular Health</div>
+                        <h2 class="research-title">Effects of Sleep Deprivation on Endothelial Function in Adults</h2>
+                        <p class="research-abstract">Moderate sleep restriction (~2–3 hours less per night) impairs endothelial function across the vascular system, including coronary arteries. A single night of less than 4 hours of sleep can reduce coronary artery function, elevating the risk for acute myocardial ischemia.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Cardiovascular Health</div>
+                        <h2 class="research-title">The Effect of Sleep Deprivation on Coronary Heart Disease</h2>
+                        <p class="research-abstract">Sleep deprivation is associated with increased morbidity and mortality in coronary heart disease patients, potentially due to autonomic dysfunction, hypertension, arrhythmia, hormonal dysregulation, oxidative stress, and inflammation.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Cardiovascular Health</div>
+                        <h2 class="research-title">Sleep in This Weekend – It May Help You Live Longer and Avoid Heart Disease</h2>
+                        <p class="research-abstract">A study of 90,000 UK residents over 14 years found that those who caught up on sleep during weekends were 20% less likely to develop heart disease compared to those who remained sleep-deprived.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Article →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Cardiovascular Health</div>
+                        <h2 class="research-title">How Sleeping in at Weekends Could Save Your Life</h2>
+                        <p class="research-abstract">Sleeping in on weekends significantly reduces the risk of developing heart disease, as extra weekend sleep is associated with reduced inflammation and healthier blood pressure and cholesterol levels.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Article →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Cardiovascular Health</div>
+                        <h2 class="research-title">Actually, You Can Catch Up on Sleep</h2>
+                        <p class="research-abstract">Catching up on sleep during weekends can mitigate the adverse cardiac effects of a sleep-poor work week, reducing the risk of heart-related illnesses such as heart failure and stroke by 20%.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Article →</a>
+                    </article>
+                </div>
+            </div>
+            
+            <!-- Mental Health Section -->
+            <div class="category-section" id="mental-health">
+                <h2 class="category-title">Mental Health</h2>
+                <div class="research-grid">
+                    <article class="research-card">
+                        <div class="research-category">Mental Health</div>
+                        <h2 class="research-title">Sleep Deprivation and Major Depressive Disorder</h2>
+                        <p class="research-abstract">A longitudinal study of 10,000 individuals found that insomnia preceded the development of depression in 40% of cases. A case study highlighted a 28-year-old woman whose chronic insomnia led to major depression within 8 months, with symptoms resolving after cognitive behavioral therapy.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Mental Health</div>
+                        <h2 class="research-title">Sleep Deprivation as a Trigger for Bipolar Disorder Episodes</h2>
+                        <p class="research-abstract">Research indicates that sleep disruption precedes 65% of manic episodes in bipolar disorder patients. One case involved a 32-year-old software engineer whose 48-hour coding sessions triggered three consecutive manic episodes, stabilized only after implementing strict sleep regulation.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Mental Health</div>
+                        <h2 class="research-title">Why Getting a Good Night's Sleep is Crucial if You Have High Blood Pressure</h2>
+                        <p class="research-abstract">A study revealed that short sleep combined with hypertension affects cognitive performance and presents a higher risk of developing dementia, emphasizing the importance of consistent, quality sleep.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Article →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Mental Health</div>
+                        <h2 class="research-title">Struggle to Fall Asleep or Feel Tired All the Time? You Could Be at Risk of Early Death from 'Circadian Syndrome'</h2>
+                        <p class="research-abstract">Difficulty falling or staying asleep, along with persistent daytime fatigue, may signal circadian syndrome, linked to increased risks of depression and other chronic health issues.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Article →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Mental Health</div>
+                        <h2 class="research-title">For Optimal Brain Function, Kids Need Better Sleep</h2>
+                        <p class="research-abstract">Insufficient sleep in children affects brain structure, connectivity, behavior, cognition, and mental health, with negative effects lasting up to two years.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Article →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Mental Health</div>
+                        <h2 class="research-title">Connecting Insufficient Sleep and Insomnia with Metabolic Dysfunction</h2>
+                        <p class="research-abstract">Insomnia disorder and symptoms are strongly associated with adverse glucose outcomes, including in those with type 2 diabetes, highlighting the interplay between sleep and mental health.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+                </div>
+            </div>
+            
+            <!-- Metabolic Health Section -->
+            <div class="category-section" id="metabolic">
+                <h2 class="category-title">Metabolic Health</h2>
+                <div class="research-grid">
+                    <article class="research-card">
+                        <div class="research-category">Metabolic Health</div>
+                        <h2 class="research-title">Sleep Deprivation's Role in Type 2 Diabetes Development</h2>
+                        <p class="research-abstract">Chronic sleep restriction (5 hours/night for 1 week) reduces insulin sensitivity by 25% and impairs glucose tolerance. A case study involved a 42-year-old executive who developed prediabetes after 3 years of sleep restriction, reversing the condition after implementing proper sleep hygiene.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Metabolic Health</div>
+                        <h2 class="research-title">Mechanisms of Sleep Deprivation-Induced Hepatic Steatosis and Insulin Resistance in Mice</h2>
+                        <p class="research-abstract">A single 6-hour sleep deprivation in mice induced glucose intolerance and increased hepatic glucose production, leading to hepatic steatosis without weight gain, mediated by increased lipid oxidation in the liver.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Metabolic Health</div>
+                        <h2 class="research-title">Metabolic Effects of Sleep Disruption, Links to Obesity and Diabetes</h2>
+                        <p class="research-abstract">Sleep disruption has detrimental effects on metabolic health, decreasing insulin sensitivity and glucose tolerance, and promoting weight gain through increased food intake and decreased physical activity.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Metabolic Health</div>
+                        <h2 class="research-title">The Impact of Sleep Disorders on Glucose Metabolism: Endocrine and Molecular Mechanisms</h2>
+                        <p class="research-abstract">Short sleep duration is an independent risk factor for weight gain and abdominal fat accumulation, as it stimulates food intake and contributes to the development of obesity and metabolic syndrome.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Metabolic Health</div>
+                        <h2 class="research-title">Prolonged Sleep Deprivation Induces a Reprogramming of Circadian Rhythmicity with the Hepatic Metabolic Transcriptomic Profile</h2>
+                        <p class="research-abstract">Five days of sleep deprivation in mice altered liver function and daily rhythms, leading to changes in sleep patterns, feeding behavior, and significant alterations in genes related to metabolism.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Metabolic Health</div>
+                        <h2 class="research-title">Insufficient Sleep is Responsible for Increased Risk of Metabolic Disease in Shift Workers</h2>
+                        <p class="research-abstract">Insufficient sleep is an independent risk factor for type 2 diabetes, comparable to traditional risk factors like obesity, with sleep restriction leading to increased hunger, decreased insulin sensitivity, and altered brain activity related to food stimuli.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+                </div>
+            </div>
+            
+            <!-- Cognitive Function Section -->
+            <div class="category-section" id="cognitive">
+                <h2 class="category-title">Cognitive Function</h2>
+                <div class="research-grid">
+                    <article class="research-card">
+                        <div class="research-category">Cognitive Function</div>
+                        <h2 class="research-title">Chronic Sleep Deprivation and Cognitive Impairment</h2>
+                        <p class="research-abstract">Chronic sleep deprivation (less than 6 hours/night for 14 days) produces cognitive performance deficits equivalent to 48 hours of total sleep deprivation. A medical resident made critical medication errors after working 24-hour shifts, illustrating how sleep deprivation mirrors legal alcohol intoxication levels in performance degradation.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Cognitive Function</div>
+                        <h2 class="research-title">The Effect of Total Sleep Deprivation on Cognitive Functions in Normal Adult Male Subjects</h2>
+                        <p class="research-abstract">A study of 18 healthy males deprived of sleep for 24 hours found decreases in cognitive functions such as motor skills, speech, memory, and complex verbal arithmetic, particularly associated with the right anterior hemisphere.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Cognitive Function</div>
+                        <h2 class="research-title">Why Getting a Good Night's Sleep is Crucial if You Have High Blood Pressure</h2>
+                        <p class="research-abstract">Short sleep combined with hypertension affects cognitive performance and presents a higher risk of developing dementia, emphasizing the importance of consistent, quality sleep.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Article →</a>
+                    </article>
+                </div>
+            </div>
+            
+            <!-- Sleep Disorders Section -->
+            <div class="category-section" id="disorders">
+                <h2 class="category-title">Sleep Disorders</h2>
+                <div class="research-grid">
+                    <article class="research-card">
+                        <div class="research-category">Sleep Disorders</div>
+                        <h2 class="research-title">Sleep and Mental Disorders: A Meta-Analysis of Polysomnographic Research</h2>
+                        <p class="research-abstract">This comprehensive meta-analysis examines polysomnographic studies across various mental disorders, revealing that sleep continuity disturbances are common across multiple psychiatric conditions. The study highlights the role of REM sleep alterations in psychiatric comorbidities.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Sleep Disorders</div>
+                        <h2 class="research-title">The Prevalence of Sleep Loss and Sleep Disorders in Young and Old Adults</h2>
+                        <p class="research-abstract">This review discusses how sleep patterns and disorders vary across age groups, noting that nearly 50–60% of the elderly population suffer from sleep disorders such as sleep apnea and restless legs syndrome. It also explores the link between chronic sleep deprivation and neurodegenerative diseases like Alzheimer's and Parkinson's.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Sleep Disorders</div>
+                        <h2 class="research-title">Sleep Disorders</h2>
+                        <p class="research-abstract">This article provides an overview of six major sleep disorders, including insomnia, circadian rhythm disorders, sleep-disordered breathing, hypersomnia/narcolepsy, parasomnias, and restless legs syndrome. It discusses diagnostic features and management strategies, emphasizing the importance of recognizing and treating these conditions in clinical practice.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Sleep Disorders</div>
+                        <h2 class="research-title">Sleep Disorders and Depression: Brief Review of the Literature, Case Report, and Nonpharmacologic Interventions for Depression</h2>
+                        <p class="research-abstract">This paper explores the bidirectional relationship between sleep disorders and depression, highlighting how insomnia can be both a symptom and a predictor of depressive episodes. It also presents nonpharmacologic interventions, such as sleep deprivation therapy, as potential treatments for depression.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Sleep Disorders</div>
+                        <h2 class="research-title">Sleep Disorders: Causes, Effects, and Solutions</h2>
+                        <p class="research-abstract">This article delves into the causes and effects of various sleep disorders, including insomnia, jet lag, and shift work sleep disorder. It discusses their impact on overall health and well-being and reviews both pharmacologic and behavioral treatment options.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+
+                    <article class="research-card">
+                        <div class="research-category">Sleep Disorders</div>
+                        <h2 class="research-title">Sleep Disorders Research From 1945 to 2020: A Bibliometric Analysis</h2>
+                        <p class="research-abstract">This bibliometric analysis traces the evolution of sleep disorder research over 75 years, highlighting trends, key areas of focus, and the increasing volume of publications in the field. It provides insights into the growth and development of sleep research globally.</p>
+                        <a href="#" class="research-link" target="_blank" rel="noopener noreferrer">Read Full Paper →</a>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // Check for saved theme preference or use light mode as default
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        
+        // Set initial theme
+        if (currentTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+        }
+        
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Category navigation functionality
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const sections = document.querySelectorAll('.category-section');
+
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const category = button.getAttribute('data-category');
+                
+                if (category === 'all') {
+                    // Show all sections
+                    sections.forEach(section => {
+                        section.style.display = 'block';
+                    });
+                    // Scroll to top of research section
+                    document.querySelector('.research-section').scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                } else {
+                    // Hide all sections first
+                    sections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    // Show and scroll to selected section
+                    const targetSection = document.getElementById(category);
+                    if (targetSection) {
+                        targetSection.style.display = 'block';
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
